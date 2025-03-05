@@ -9,6 +9,5 @@ import org.marton.studio.ui.screens.home.HomeScreenVoyager
 @Preview
 fun App() {
     Navigator(screen = HomeScreenVoyager())
-   //DetailScreen()
 }
 

@@ -15,7 +15,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -26,12 +25,11 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import coil3.compose.AsyncImage
-import moviesapp.composeapp.generated.resources.Res
-import moviesapp.composeapp.generated.resources.app_name
-import org.jetbrains.compose.resources.stringResource
 import org.marton.studio.Movie
 import org.marton.studio.movies
 import org.marton.studio.ui.screens.Screen
+import org.marton.studio.ui.screens.bottombar.BottomBarScreen
+import org.marton.studio.ui.screens.components.MyTopAppBar
 import org.marton.studio.ui.screens.detail.DetailScreenVoyager
 
 class HomeScreenVoyager : Screen {
@@ -43,9 +41,11 @@ class HomeScreenVoyager : Screen {
             val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
             Scaffold(
                 topBar = {
-                    TopAppBar(title = {
-                        Text(stringResource(Res.string.app_name))
-                    })
+                    MyTopAppBar(
+                        onBackClick = {},
+                        firstAction = true,
+                        onSettingsClick = {navigator?.push(BottomBarScreen())}
+                    )
                 },
                 modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
             ) { padding ->
@@ -66,7 +66,6 @@ class HomeScreenVoyager : Screen {
             }
         }
     }
-
 
     @Composable
     fun MovieItem(movie: Movie, onMovieClick: (String) -> Unit) {

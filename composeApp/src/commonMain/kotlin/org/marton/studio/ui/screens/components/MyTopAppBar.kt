@@ -19,6 +19,7 @@ import org.jetbrains.compose.resources.stringResource
 fun MyTopAppBar(
     title: String? = null,
     onBackClick: () -> Unit,
+    firstAction: Boolean = false,
     onSettingsClick: () -> Unit
 ) {
     TopAppBar(
@@ -34,12 +35,15 @@ fun MyTopAppBar(
             }
         },
         actions = {
-            IconButton(onClick = onSettingsClick) {
-                Icon(
-                    imageVector = Icons.Filled.Call,
-                    contentDescription = "Settings"
-                )
+            if (firstAction){
+                IconButton(onClick = onSettingsClick) {
+                    Icon(
+                        imageVector = Icons.Filled.Call,
+                        contentDescription = "Settings"
+                    )
+                }
             }
+
         }
     )
 }

@@ -6,27 +6,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.Navigator
 import coil3.compose.AsyncImage
-import moviesapp.composeapp.generated.resources.Res
-import moviesapp.composeapp.generated.resources.back
-import org.jetbrains.compose.resources.stringResource
 import org.marton.studio.movies
 import org.marton.studio.ui.screens.Screen
 import org.marton.studio.ui.screens.components.MyTopAppBar
@@ -38,7 +28,6 @@ class DetailScreenVoyager(private val movie: String) : Screen {
         DetailScreen(movie)
     }
 }
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(movie: String) {
     val navigator = LocalNavigator.current
