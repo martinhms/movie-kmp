@@ -1,0 +1,38 @@
+package org.marton.studio.data
+
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import org.marton.studio.Movie
+
+@Serializable
+data class MovieResponse(
+    @SerialName("page") val page: Int? = null,
+    @SerialName("results") val results: List<Result>? = null,
+    @SerialName("total_pages") val totalPages: Int? = null,
+    @SerialName("total_results") val totalResults: Int? = null
+)
+
+@Serializable
+data class Result(
+   // val adult: Boolean,
+  //  @SerialName("backdrop_path") val backdropPath: String,
+  //  @SerialName("genre_ids") val genreIds: List<Int>,
+    val id: Int,
+ //   @SerialName("original_language") val originalLanguage: String,
+    @SerialName("original_title") val originalTitle: String,
+    val overview: String,
+    //val popularity: Double,
+    @SerialName("poster_path") val posterPath: String,
+   // @SerialName("release_date") val releaseDate: String,
+    val title: String,
+  //  val video: Boolean,
+  //  @SerialName("vote_average") val voteAverage: Double,
+ //   @SerialName("vote_count") val voteCount: Int
+) {
+
+    fun toDomainMovie() = Movie(
+        id = id,
+        title = title,
+        poster = "https://image.tmdb.org/t/p/w500/$posterPath",
+    )
+}
