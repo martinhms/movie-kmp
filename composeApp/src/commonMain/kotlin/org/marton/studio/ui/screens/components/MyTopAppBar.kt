@@ -18,24 +18,27 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MyTopAppBar(
     title: String? = null,
+    navIcon: Boolean = true,
     onBackClick: () -> Unit,
     firstAction: Boolean = false,
     onSettingsClick: () -> Unit
 ) {
     TopAppBar(
         title = {
-            Text(title?: stringResource(Res.string.app_name))
+            Text(title ?: stringResource(Res.string.app_name))
         },
         navigationIcon = {
-            IconButton(onClick = onBackClick) {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = "Back"
-                )
+            if (navIcon) {
+                IconButton(onClick = onBackClick) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "Back"
+                    )
+                }
             }
         },
         actions = {
-            if (firstAction){
+            if (firstAction) {
                 IconButton(onClick = onSettingsClick) {
                     Icon(
                         imageVector = Icons.Filled.Call,

@@ -14,23 +14,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.LocalNavigator
 import coil3.compose.AsyncImage
 import org.marton.studio.movies
 import org.marton.studio.ui.screens.Screen
 import org.marton.studio.ui.screens.components.MyTopAppBar
 
-class DetailScreenVoyager(private val movie: String) : Screen {
-
-    @Composable
-    override fun Content() {
-        DetailScreen(movie)
-    }
-}
 @Composable
-fun DetailScreen(movie: String) {
-    val navigator = LocalNavigator.current
+fun DetailScreen(movie: String, onBack: ()-> Unit) {
     val movieDetail = movies.find { it.id.toString() == movie } ?: return
     Screen {
         Scaffold(
@@ -38,7 +28,7 @@ fun DetailScreen(movie: String) {
             {
                 MyTopAppBar(
                     title = movieDetail.title,
-                    onBackClick = { navigator?.pop() },
+                    onBackClick = { onBack() },
                     onSettingsClick = {}
                 )
             }
@@ -57,7 +47,7 @@ fun DetailScreen(movie: String) {
                     modifier = Modifier.padding(16.dp),
                     style = MaterialTheme.typography.headlineMedium
                 )
-                Button(onClick = { navigator?.pop() }) {
+                Button(onClick = { onBack() }) {
                     Text(text = "Volver")
                 }
             }
