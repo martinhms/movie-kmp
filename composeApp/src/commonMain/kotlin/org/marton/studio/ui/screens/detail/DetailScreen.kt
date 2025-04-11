@@ -15,43 +15,46 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import org.marton.studio.movies
 import org.marton.studio.ui.screens.Screen
+import org.marton.studio.ui.screens.components.LoadingIndicator
 import org.marton.studio.ui.screens.components.MyTopAppBar
 
 @Composable
-fun DetailScreen(movie: String, onBack: ()-> Unit) {
-    val movieDetail = movies.find { it.id.toString() == movie } ?: return
+fun DetailScreen(viewModel: DetailViewModel, onBack: () -> Unit) {
+    val state = viewModel.state
     Screen {
         Scaffold(
             topBar =
             {
                 MyTopAppBar(
-                    title = movieDetail.title,
+                    title = state.movie?.title ?: "",
                     onBackClick = { onBack() },
                     onSettingsClick = {}
                 )
             }
 
         ) { padding ->
-            Column(modifier = Modifier.padding(padding).verticalScroll(rememberScrollState())) {
-                            AsyncImage(
-                                model = movieDetail.poster,
-                                contentDescription = movieDetail.title,
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier.fillMaxWidth()
-                                    .aspectRatio(16 / 9f)
-                            )
-                Text(
-                    text = movieDetail.title,
-                    modifier = Modifier.padding(16.dp),
-                    style = MaterialTheme.typography.headlineMedium
-                )
-                Button(onClick = { onBack() }) {
-                    Text(text = "Volver")
+
+            LoadingIndicator(eneable = state.loading)
+            state.movie.let {
+                Column(modifier = Modifier.padding(padding).verticalScroll(rememberScrollState())) {
+                    AsyncImage(
+                        model = state.movie?.poster,
+                        contentDescription = state.movie?.title,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.fillMaxWidth()
+                            .aspectRatio(16 / 9f)
+                    )
+                    Text(
+                        text = state.movie?.title ?: "",
+                        modifier = Modifier.padding(16.dp),
+                        style = MaterialTheme.typography.headlineMedium
+                    )
+                    Button(onClick = { onBack() }) {
+                        Text(text = "Volver")
+                    }
                 }
             }
-
         }
     }
 }

@@ -1,4 +1,4 @@
-package org.marton.studio.ui.screens.home
+package org.marton.studio.ui.screens.detail
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,9 +9,7 @@ import kotlinx.coroutines.launch
 import org.marton.studio.Movie
 import org.marton.studio.data.MoviesRepository
 
-class HomeViewModel(
-    private val repository: MoviesRepository
-) : ViewModel() {
+class DetailViewModel(id: String, private val repository: MoviesRepository) : ViewModel() {
 
     var state by mutableStateOf(UiState())
         private set
@@ -20,19 +18,19 @@ class HomeViewModel(
         viewModelScope.launch {
             try {
                 state = UiState(loading = true)
-                val response = repository.fetchPopularMovies()
-                state = UiState(loading = false, movies = response)
-                println("fetching movies response: $response")
+                val response = repository.fetchMovieDetails(id)
+                state = UiState(loading = false, movie = response)
+                println("fetching detail detail movie response: $response")
             } catch (e: Exception) {
-                println("Error fetching movies ${e.message}")
-                state = UiState(loading = false, error = e.message)
+                println("Error fetching detail ${e.message}")
+                state =UiState(loading = false, error = e.message)
             }
         }
     }
 
     data class UiState(
         val loading: Boolean = false,
-        val movies: List<Movie> = emptyList(),
+        val movie: Movie? = null,
         val error: String? = null
     )
 }

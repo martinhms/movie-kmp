@@ -2,7 +2,6 @@ package org.marton.studio.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.marton.studio.Movie
 
 @Serializable
 data class MovieResponse(
@@ -22,7 +21,7 @@ data class Result(
     @SerialName("original_title") val originalTitle: String,
     val overview: String,
     //val popularity: Double,
-    @SerialName("poster_path") val posterPath: String,
+    @SerialName("poster_path") val posterPath: String?,
    // @SerialName("release_date") val releaseDate: String,
     val title: String,
   //  val video: Boolean,
@@ -30,9 +29,5 @@ data class Result(
  //   @SerialName("vote_count") val voteCount: Int
 ) {
 
-    fun toDomainMovie() = Movie(
-        id = id,
-        title = title,
-        poster = "https://image.tmdb.org/t/p/w500/$posterPath",
-    )
+
 }
