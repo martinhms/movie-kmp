@@ -39,7 +39,7 @@ fun DetailScreen(viewModel: DetailViewModel, onBack: () -> Unit) {
             state.movie.let {
                 Column(modifier = Modifier.padding(padding).verticalScroll(rememberScrollState())) {
                     AsyncImage(
-                        model = state.movie?.poster,
+                        model = state.movie?.backdrop,
                         contentDescription = state.movie?.title,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.fillMaxWidth()

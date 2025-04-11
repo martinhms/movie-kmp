@@ -13,15 +13,17 @@ class MoviesRepository(private val moviesService: MovieService) {
 
 }
 
-fun Result.toDomainMovie() = Movie(
-    id = id,
-    title = title,
-    poster =if (posterPath != null) "https://image.tmdb.org/t/p/w500/$posterPath" else "",
-)
-
 fun DetailMovieResponse.toDomainMovie() = Movie(
     id = id,
     title = title,
-    poster =if (posterPath != null) "https://image.tmdb.org/t/p/w500/$posterPath" else "",
+    poster = if (posterPath != null) "https://image.tmdb.org/t/p/w185/$posterPath" else "",
+    overview = overview,
+    releaseNote = releaseDate,
+    backdrop = backdropPath.let { "https://image.tmdb.org/t/p/w780/$it" },
+    originalTitle = originalTitle,
+    originalLanguage = originalLanguage,
+    popularity = popularity,
+    voteAverage = voteAverage,
 )
+
 
