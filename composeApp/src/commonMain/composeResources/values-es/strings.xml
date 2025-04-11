@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MoviesApp</string>
+    <string name="back">Volver</string>
+    <string name="language">Idioma Original</string>
+    <string name="title">Título original</string>
+    <string name="votes">Votos</string>
+    <string name="popular">Popular</string>
+</resources>

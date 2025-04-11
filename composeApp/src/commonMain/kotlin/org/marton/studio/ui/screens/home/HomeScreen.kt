@@ -42,13 +42,13 @@ fun HomeScreen(
                     onBackClick = {},
                     navIcon = false,
                     firstAction = false,
-                    onSettingsClick = {}
+                    onSettingsClick = {},
+                    scrollBehavior = scrollBehavior
                 )
             },
-            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
         ) { padding ->
             val state = viewModel.state
-            LoadingIndicator(eneable = state.loading)
+            LoadingIndicator(eneable = state.loading, modifier = Modifier.padding(padding))
             LazyVerticalGrid(
                 modifier = Modifier.padding(padding),
                 columns = GridCells.Adaptive(120.dp),

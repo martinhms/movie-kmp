@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun LoadingIndicator(eneable: Boolean) {
+fun LoadingIndicator(eneable: Boolean, modifier: Modifier) {
 
     if (eneable) {
         Box(

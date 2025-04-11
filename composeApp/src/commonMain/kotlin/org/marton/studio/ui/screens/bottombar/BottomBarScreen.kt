@@ -1,10 +1,12 @@
 package org.marton.studio.ui.screens.bottombar
 
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -16,9 +18,12 @@ import org.marton.studio.ui.screens.components.MyTopAppBar
 
 class BottomBarScreen : Screen {
 
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
         val nav = LocalNavigator.current
+        val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+
         TabNavigator(
             HomeTab,
             tabDisposable = {
@@ -34,7 +39,8 @@ class BottomBarScreen : Screen {
                         title = it.current.options.title,
                         onBackClick = {nav?.pop()},
                         firstAction = false,
-                        onSettingsClick = {}
+                        onSettingsClick = {},
+                        scrollBehavior = scrollBehavior
                     )
                 },
                 bottomBar = {

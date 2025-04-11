@@ -8,6 +8,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import moviesapp.composeapp.generated.resources.Res
 import moviesapp.composeapp.generated.resources.app_name
@@ -21,7 +22,8 @@ fun MyTopAppBar(
     navIcon: Boolean = true,
     onBackClick: () -> Unit,
     firstAction: Boolean = false,
-    onSettingsClick: () -> Unit
+    onSettingsClick: () -> Unit,
+    scrollBehavior: TopAppBarScrollBehavior
 ) {
     TopAppBar(
         title = {
@@ -46,7 +48,7 @@ fun MyTopAppBar(
                     )
                 }
             }
-
-        }
+        },
+        scrollBehavior = scrollBehavior
     )
 }
