@@ -1,6 +1,7 @@
 package org.marton.studio.ui.screens.components
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -33,7 +34,7 @@ fun MyTopAppBar(
             if (navIcon) {
                 IconButton(onClick = onBackClick) {
                     Icon(
-                        imageVector = Icons.Filled.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Back"
                     )
                 }

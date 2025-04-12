@@ -1,5 +1,4 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -8,11 +7,12 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.androidxRoom)
 }
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
@@ -30,7 +30,12 @@ kotlin {
     }
 
     jvm("desktop")
-
+    configurations.all {
+        resolutionStrategy {
+            force("org.jetbrains:annotations:23.0.0")
+            exclude(group = "com.intellij", module = "annotations")
+        }
+    }
     sourceSets {
         val desktopMain by getting
 
@@ -38,6 +43,11 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.okhttp)
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.androidx.room.compiler)
+            implementation(libs.androidx.sqlite.bundle)
+            implementation(libs.androidx.room.ktx)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -67,6 +77,10 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }
+    }
+
+    sourceSets.commonMain {
+        kotlin.srcDir("build/generated/ksp/metadata")
     }
 }
 
@@ -111,4 +125,7 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+}
+room {
+    schemaDirectory("$projectDir/schemas")
 }

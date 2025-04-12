@@ -2,7 +2,6 @@ package org.marton.studio.ui.screens.detail
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
@@ -81,7 +80,7 @@ private fun MovieDetailComponent(
 ) {
     Column(modifier = modifier.verticalScroll(rememberScrollState())) {
         AsyncImage(
-            model = movie?.backdrop,
+            model = movie?.backdrop ?: movie?.poster,
             contentDescription = movie?.title,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxWidth()

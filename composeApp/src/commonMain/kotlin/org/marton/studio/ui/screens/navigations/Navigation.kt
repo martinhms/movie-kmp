@@ -61,8 +61,7 @@ private fun rememberMovieRepository(
     val client = HttpClient {
         install(ContentNegotiation) {
             json(Json {
-                ignoreUnknownKeys =
-                    true // si no se parsea el objeto completo lanza un error en false,
+                ignoreUnknownKeys = true //sino parsea el objeto completo lanza un error en false,
                 coerceInputValues = true
             })
         }
