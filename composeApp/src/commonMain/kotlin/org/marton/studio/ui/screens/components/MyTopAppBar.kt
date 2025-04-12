@@ -8,6 +8,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import moviesapp.composeapp.generated.resources.Res
 import moviesapp.composeapp.generated.resources.app_name
@@ -18,24 +19,28 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MyTopAppBar(
     title: String? = null,
+    navIcon: Boolean = true,
     onBackClick: () -> Unit,
     firstAction: Boolean = false,
-    onSettingsClick: () -> Unit
+    onSettingsClick: () -> Unit,
+    scrollBehavior: TopAppBarScrollBehavior
 ) {
     TopAppBar(
         title = {
-            Text(title?: stringResource(Res.string.app_name))
+            Text(title ?: stringResource(Res.string.app_name))
         },
         navigationIcon = {
-            IconButton(onClick = onBackClick) {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = "Back"
-                )
+            if (navIcon) {
+                IconButton(onClick = onBackClick) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "Back"
+                    )
+                }
             }
         },
         actions = {
-            if (firstAction){
+            if (firstAction) {
                 IconButton(onClick = onSettingsClick) {
                     Icon(
                         imageVector = Icons.Filled.Call,
@@ -43,7 +48,7 @@ fun MyTopAppBar(
                     )
                 }
             }
-
-        }
+        },
+        scrollBehavior = scrollBehavior
     )
 }
