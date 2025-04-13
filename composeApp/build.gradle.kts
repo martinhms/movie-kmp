@@ -112,6 +112,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.common.jvm)
     debugImplementation(compose.uiTooling)
 }
 
